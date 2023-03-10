@@ -1,19 +1,18 @@
 package create
 
 import (
+	"github.com/IDL13/Neuronka/internal/config"
 	"github.com/fxsjy/gonn/gonn"
 )
 
 func CreateNN() {
 	nn := gonn.DefaultNetwork(6, 18, 2, false)
 
-	input := [][]float64{
-		[]float64{0.0, 0.0, 1.0, 1.0, 2.0, 2.0}, []float64{1.0, 1.0, 2.0, 2.0, 3.0, 1.0}, []float64{1.0, 1.0, 2.0, 2.0, 3.0, 3.0},
-		[]float64{2.0, 4.0, 3.0, 3.0, 4.0, 2.0}, []float64{1.0, 5.0, 2.0, 4.0, 3.0, 5.0}}
+	config := config.New()
+	config.Read("input.txt", "target.txt")
 
-	target := [][]float64{
-		[]float64{1, 0}, []float64{0, 1}, []float64{1, 0},
-		[]float64{0, 1}, []float64{1, 0}}
+	input := config.Input
+	target := config.Target
 
 	nn.Train(input, target, 10000)
 
