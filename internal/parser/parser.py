@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-
+import ctypes
+import numpy
 
 def request(url):
     praises_x = []
@@ -16,20 +17,25 @@ def request(url):
         art_y = y[y_iter].text
         praises_y.append(art_y.split(" ")[0].split(".")[0])
 
-    praises_y = list(map(float, praises_y))
-
-    print(praises_y)
+    praises_y = list(map(numpy.float64, praises_y))
 
     for i in reversed(range(0, 3)):
         art = x[i].text
-        praises_x.append(art.split(" ")[1])   
+        text = art.replace(" ", "")
+        praises_x.append(text)  
     
-    praises_x = list(map(float, praises_x))
+    praises_x = list(map(numpy.float64, praises_x))
 
-    print(praises_x)
+    return praises_x, praises_y
 
 def main():
-    request("https://investfunds.ru/indexes/9021/") 
+    p_x, p_y = request("https://investfunds.ru/indexes/9021/")
+    with open("parser.txt", "w") as f:
+        for i in p_x:
+            f.write(str(i)+" ")
+        f.write("\n")
+        for j in p_y:
+            f.write(str(j)+" ")
 
 if __name__ == "__main__":
     main()
