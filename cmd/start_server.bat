@@ -1,3 +1,4 @@
+
 pip install requests
 pip install bs4
 pip install lxml
@@ -8,4 +9,5 @@ cd ..
 cd .. 
 copy .\internal\parser\*.txt .\cmd
 cd cmd
-go run main.go
+go run server.go
+

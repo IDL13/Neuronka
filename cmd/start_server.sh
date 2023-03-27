@@ -3,9 +3,9 @@ pip install bs4
 pip install lxml
 cd ..
 cd internal/parser
-python parser.py
+python3 parser.py
 cd ..
 cd .. 
-copy .\internal\parser\*.txt .\cmd
+cp .\internal\parser\*.txt .\cmd
 cd cmd
-go run main.go
+go run server.go
