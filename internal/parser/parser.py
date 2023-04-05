@@ -4,8 +4,8 @@ import ctypes
 import numpy
 
 def request(url):
-    praises_x = []
-    praises_y = []
+    price_x = []
+    price_y = []
     r = requests.get(url).text
     soup1 = BeautifulSoup(r, 'lxml')
     x = soup1.findAll("div", class_ = "js_td_width")
@@ -15,18 +15,18 @@ def request(url):
 
     for y_iter in reversed(range(1, 4)):
         art_y = y[y_iter].text
-        praises_y.append(art_y.split(" ")[0].split(".")[0])
+        price_y.append(art_y.split(" ")[0].split(".")[0])
 
-    praises_y = list(map(numpy.float64, praises_y))
+    price_y = list(map(numpy.float64, price_y))
 
     for i in reversed(range(0, 3)):
         art = x[i].text
         text = art.replace(" ", "")
-        praises_x.append(text)  
+        price_x.append(text)  
     
-    praises_x = list(map(numpy.float64, praises_x))
+    price_x = list(map(numpy.float64, price_x))
 
-    return praises_x, praises_y
+    return price_x, price_y
 
 def main():
     p_x, p_y = request("https://investfunds.ru/indexes/9021/")

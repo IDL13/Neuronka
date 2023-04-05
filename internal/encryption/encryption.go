@@ -21,7 +21,7 @@ type Mas struct {
 	Y3 float64 `json:"y3"`
 }
 
-func (m *Mas) Encryption(c echo.Context) (*Mas, error) {
+func (m *Mas) Encryption(c echo.Context) (*Mas, error) { // Получение и распарсинг json
 	defer c.Request().Body.Close()
 	b, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {

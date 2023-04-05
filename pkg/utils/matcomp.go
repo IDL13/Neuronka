@@ -9,17 +9,17 @@ import (
 )
 
 func MatrixCompresion(fileName string) [][]float64 {
-	inp, err := os.ReadFile(fileName)
+	inp, err := os.ReadFile(fileName) // Чтение файла
 	if err != nil {
 		fmt.Println("error")
 	}
 
-	r := strings.NewReader(string(inp))
+	r := strings.NewReader(string(inp)) // Создание ридера
 	s := bufio.NewScanner(r)
 
-	var matrix [][]float64
+	var matrix [][]float64 // Итоговая матрица данных
 
-	for s.Scan() {
+	for s.Scan() { // Запись в матрицу данных из файла
 		records := strings.Fields(s.Text())
 		line := make([]float64, len(records))
 		matrix = append(matrix, line)
